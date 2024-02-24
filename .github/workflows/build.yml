@@ -76,5 +76,5 @@ jobs:
           echo "VAL_ELEMENT_2=${VAL_ELEMENT_2}" >> .env
           cd ..
 
-      - name: Build ans start Docker Compose
+      - name: Build and start Docker Compose
         run: bash ./test_build.sh

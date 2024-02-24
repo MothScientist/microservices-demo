@@ -1,3 +1,7 @@
+#### What does this code do?
+Using parsing (bs4 + aiohttp), it receives data from open sources about exchange rates in different cities and banks and, through an API service (FastAPI), provides this data upon request. 
+The Telegram bot microservice (aiogram) receives data (aiohttp) and sends it to the user.</br></br>
+You configure where and how to receive data yourself.
 ## Disclaimer:
 ### The site URL, city names and class names of the html elements used on the site are hidden in the .env file for the author's own reasons.
 
@@ -5,9 +9,9 @@
 
 ### For developers:
 In this repository you can find for yourself:
-- Setting up the operation of 2 completely asynchronous microservices via FastAPI/aiohttp
 - Organizing the structure of a microservices project
-- Dockerfiles and docker-compose.yml
+- Setting up the operation of 2 completely asynchronous microservices via FastAPI/aiohttp
+- Setting up Dockerfile for each service and docker-compose.yml
 - Setting up CI/CD
 
 ### MIT License
