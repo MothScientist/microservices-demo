@@ -1,0 +1,80 @@
+name: Docker Compose
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * */2'  # https://crontab.cronhub.io/
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  build-and-deploy:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 2
+    strategy:
+      matrix:
+        #  The job will be executed for every possible combination of variables.
+        # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+        os: [ ubuntu-latest ]
+        python-version: [ '3.12' ]
+
+    steps:
+      # Action for checking out a repo - https://github.com/actions/checkout
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # GitHub Action to set up Docker Buildx - https://github.com/docker/setup-buildx-action
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Create .env file
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CITY_1: ${{ secrets.CITY_1 }}
+          CITY_2: ${{ secrets.CITY_2 }}
+          CITY_3: ${{ secrets.CITY_3 }}
+          CITY_4: ${{ secrets.CITY_4 }}
+          CITY_5: ${{ secrets.CITY_5 }}
+          CODE_CITY_1: ${{ secrets.CODE_CITY_1 }}
+          CODE_CITY_2: ${{ secrets.CODE_CITY_2 }}
+          CODE_CITY_3: ${{ secrets.CODE_CITY_3 }}
+          CODE_CITY_4: ${{ secrets.CODE_CITY_4 }}
+          CODE_CITY_5: ${{ secrets.CODE_CITY_5 }}
+          ELEMENT_1: ${{ secrets.ELEMENT_1 }}
+          SUB_ELEMENT_1: ${{ secrets.SUB_ELEMENT_1 }}
+          VAL_ELEMENT_1: ${{ secrets.VAL_ELEMENT_1 }}
+          ELEMENT_2: ${{ secrets.ELEMENT_2 }}
+          SUB_ELEMENT_2: ${{ secrets.SUB_ELEMENT_2 }}
+          VAL_ELEMENT_2: ${{ secrets.VAL_ELEMENT_2 }}
+        run: |
+          cd async_bot
+          echo "BOT_TOKEN=${BOT_TOKEN}" >> .env
+          echo "CITY_1=${CITY_1}" >> .env
+          echo "CITY_2=${CITY_2}" >> .env
+          echo "CITY_3=${CITY_3}" >> .env
+          echo "CITY_4=${CITY_4}" >> .env
+          echo "CITY_5=${CITY_5}" >> .env
+          cd ..
+          cd async_parser
+          echo "SITE_URL=${SITE_URL}" >> .env
+          echo "CITY_1=${CITY_1}" >> .env
+          echo "CITY_2=${CITY_2}" >> .env
+          echo "CITY_3=${CITY_3}" >> .env
+          echo "CITY_4=${CITY_4}" >> .env
+          echo "CITY_5=${CITY_5}" >> .env
+          echo "CODE_CITY_1=${CODE_CITY_1}" >> .env
+          echo "CODE_CITY_2=${CODE_CITY_2}" >> .env
+          echo "CODE_CITY_3=${CODE_CITY_3}" >> .env
+          echo "CODE_CITY_4=${CODE_CITY_4}" >> .env
+          echo "CODE_CITY_5=${CODE_CITY_5}" >> .env
+          echo "ELEMENT_1=${ELEMENT_1}" >> .env
+          echo "SUB_ELEMENT_1=${SUB_ELEMENT_1}" >> .env
+          echo "VAL_ELEMENT_1=${VAL_ELEMENT_1}" >> .env
+          echo "ELEMENT_2=${ELEMENT_2}" >> .env
+          echo "SUB_ELEMENT_2=${SUB_ELEMENT_2}" >> .env
+          echo "VAL_ELEMENT_2=${VAL_ELEMENT_2}" >> .env
+          cd ..
+
+      - name: Build ans start Docker Compose
+        run: bash ./test_build.sh

@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  async_api:
+    build: ./async_parser
+    ports:
+      - "8000:8000"
+    networks:
+      - docker_network
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+  async_bot:
+    build: ./async_bot
+    networks:
+      - docker_network
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+
+networks:
+  docker_network:
+    driver: bridge
