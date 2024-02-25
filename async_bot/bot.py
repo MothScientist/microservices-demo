@@ -1,3 +1,7 @@
+"""
+A module responsible for the Telegram bot, which processes user messages and responds to them.
+"""
+
 from asyncio import run as asyncio_run
 from logging import basicConfig as logging_basicConfig, INFO
 from sys import stdout

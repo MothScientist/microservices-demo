@@ -1,3 +1,7 @@
+"""
+A module through which the bot sends a get request to another microservice
+"""
+
 from aiohttp import ClientSession
 
 

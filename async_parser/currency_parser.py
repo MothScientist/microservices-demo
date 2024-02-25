@@ -1,3 +1,7 @@
+"""
+Parser module
+"""
+
 from os import getenv
 from dotenv import load_dotenv
 from typing import Final

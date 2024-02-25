@@ -1,3 +1,7 @@
+"""
+API module that allows you to connect the parser application with the client application
+"""
+
 from fastapi import FastAPI, HTTPException
 from os import getenv
 from dotenv import load_dotenv
