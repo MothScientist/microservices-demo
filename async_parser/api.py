@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from os import getenv
 from dotenv import load_dotenv
 from typing import Final
@@ -17,13 +17,27 @@ CITY_5: Final = getenv("CITY_5").replace("_", " ")
 
 
 async def get_datetime() -> str:
-    return datetime.now(timezone(timedelta(hours=3))).strftime("%H:%M %d/%m/%Y")
+    """
+    Returns date and time in UTC+0 (GMT)
+    :return: Time and date format HH:MM dd/mm/YYYY as a string
+    """
+    res: str = datetime.now(timezone(timedelta())).strftime("%H:%M %d/%m/%Y") + "GMT - UTC+0"
+    return res
 
 
 @app.get("/get_prices")
 async def get_prices_route(currency: str, city: str) -> dict:
+    """
+    Accepts a get request with parameters specified in the url
+    :param currency:
+    :param city:
+    :return: data in JSON format (dictionary)
+    """
     curr_datetime: str = await get_datetime()
-    res: str = await async_parser(currency, city)
+    try:
+        res: str = await async_parser(currency, city)
+    except ConnectionError:
+        raise HTTPException(status_code=404, detail="Item not found")
     return {"city_currency": f"{city} | {currency}",
             "date_time": curr_datetime,
             "res": res}
@@ -31,6 +45,10 @@ async def get_prices_route(currency: str, city: str) -> dict:
 
 @app.get("/options")
 async def options_route() -> dict:
+    """
+    Returns static data
+    :return: data in JSON format (dictionary)
+    """
     return {"cities": [CITY_1,
                        CITY_2,
                        CITY_3,

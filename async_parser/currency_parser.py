@@ -34,8 +34,11 @@ VAL_ELEMENT_2: Final = getenv("VAL_ELEMENT_2")
 
 async def async_send_get_request(url: str) -> str:
     """
+    Sends a request to the site you are parsing.
     Returns the site's response to a get request at the specified url.
     If the site is unavailable, a ConnectionError is raised.
+    :param url: url of the site you are parsing
+    :return: html as a string
     """
     async with ClientSession() as session:
         async with session.get(url) as response:
@@ -66,6 +69,7 @@ async def async_parser(currency: str, city: str) -> str:
     html: str = await async_send_get_request(url)
 
     soup = BeautifulSoup(html, "lxml")
+
     banks: list = soup.find_all(ELEMENT_1,{SUB_ELEMENT_1: VAL_ELEMENT_1})[1:]
     prices: list = soup.find_all(ELEMENT_2, {SUB_ELEMENT_2: VAL_ELEMENT_2})
 
