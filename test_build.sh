@@ -1,10 +1,7 @@
 #!/bin/env sh
 
-echo ">> Building Docker Compose..."
-docker-compose build
-
-echo ">> Running Docker Compose..."
-docker-compose up -d
+echo ">> Assembling containers and launching them..."
+bash run_prod.sh
 
 # The -d flag is used to start services in the background,
 # which allows you to continue working in the terminal without being tied to the process of running containers.
@@ -12,15 +9,12 @@ docker-compose up -d
 echo ">> sleep 5..."
 sleep 5
 
-echo ">> Checking the status of containers:"
-docker ps -s
-# The -s flag allows you to get information about the sizes of containers
-
-echo ">> Stopping Docker Compose and removing containers..."
-docker-compose down -v
+echo ">> Stopping Docker Compose..."
+docker-compose down --volumes  # Stopping running containers
+# --volumes - attached volumes are also deleted
 
 echo ">> sleep 5"
 sleep 5
 
 echo ">> Checking the status of containers:"
-docker-compose ps
+docker ps
