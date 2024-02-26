@@ -83,7 +83,3 @@ async def async_parser(currency: str, city: str) -> str:
         bot_answer += banks[i].text + ": " + prices[i].text + "\n"
 
     return bot_answer
-
-# if __name__ == "__main__":
-#     from asyncio import run as asyncio_run
-#     print(asyncio_run(async_parser("eur", "Moscow")))
