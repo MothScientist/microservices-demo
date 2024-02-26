@@ -17,5 +17,7 @@ In this repository you can find for yourself:
 - Setting up the operation of 2 completely asynchronous microservices via FastAPI/aiohttp
 - Setting up Dockerfile for each service and docker-compose.yml
 - Setting up CI/CD
+- Availability of bash scripts
+- The code has detailed comments
 
 ### MIT License

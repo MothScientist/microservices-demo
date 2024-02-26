@@ -25,7 +25,7 @@ async def get_datetime() -> str:
     Returns date and time in UTC+0 (GMT)
     :return: Time and date format HH:MM dd/mm/YYYY as a string
     """
-    res: str = datetime.now(timezone(timedelta())).strftime("%H:%M %d/%m/%Y") + "GMT - UTC+0"
+    res: str = datetime.now(timezone(timedelta())).strftime("%H:%M %d/%m/%Y") + " " + "GMT - UTC+0"
     return res
 
 
