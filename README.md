@@ -1,3 +1,5 @@
+[![Docker Compose](https://github.com/MothScientist/microservices-demo/actions/workflows/build.yml/badge.svg)](https://github.com/MothScientist/microservices-demo/actions/workflows/build.yml)
+
 ## Disclaimer:
 ### The site URL, city names and class names of the html elements used on the site are hidden in the .env file for the author's own reasons.
 
