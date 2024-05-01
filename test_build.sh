@@ -10,7 +10,7 @@ echo ">> sleep 5..."
 sleep 5
 
 echo ">> Stopping Docker Compose..."
-docker-compose down --volumes  # Stopping running containers
+docker compose down --volumes  # Stopping running containers
 # --volumes - attached volumes are also deleted
 
 echo ">> sleep 5"
