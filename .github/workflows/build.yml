@@ -2,8 +2,8 @@ name: Docker Compose
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 */14 * *'  # https://crontab.cronhub.io/
+  #schedule:
+    #- cron: '0 0 */14 * *'  # https://crontab.cronhub.io/
   push:
     branches: [ master ]
   pull_request:
