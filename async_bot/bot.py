@@ -104,9 +104,6 @@ async def callback_select_currency(callback: types.CallbackQuery) -> None:
         try:
             response_json: dict = await async_get(f"http://async_api:8000/get_prices?currency={currency_code}&city={city_code}")  # accessed over the network inside Docker # noqa
 
-        # ConnectionError - TODO
-        # ClientConnectorError - TODO
-        # ValueError - TODO
         except (ConnectionError, ClientConnectorError, ValueError):
             # If your microservice is not responding or the site you are getting data from
             await callback.message.edit_text(text="Error. Please try again later :(")
