@@ -53,12 +53,7 @@ async def options_route() -> dict:
     Returns static data
     :return: data in JSON format (dictionary)
     """
-    return {"cities": [CITY_1,
-                       CITY_2,
-                       CITY_3,
-                       CITY_4,
-                       CITY_5],
-
-            "currencies": ["USD",
-                           "EUR"]
-            }
+    return {
+        "cities": [CITY_1, CITY_2, CITY_3, CITY_4, CITY_5],
+        "currencies": ["USD", "EUR"]
+    }
